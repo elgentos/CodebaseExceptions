@@ -14,7 +14,9 @@ The excellent php-airbrake class is included because the file Configuration.php 
     
 Magento doesn't actually throw exceptions; it uses a custom exception handler. Therefore we cannot use the EventHandler that is bundled with php-airbrake but instead we dissect Magento's stack trace message and feed it to Codebase Exceptions.    
     
-The file errors/report.php needs to be overwritten for the helper function to be called.
+The file errors/report.php needs to be overwritten for the helper function to be called.   
+   
+You can test whether the extension works by throwing an exception by visiting http://www.yourdomain.com/exceptions/index/test
 
 ## Installation ##
     cd /path/to/your/magento/root
