@@ -19,4 +19,4 @@ Magento doesn't actually throw exceptions; it uses a custom exception handler. T
     cp -R CodebaseExceptions/* .
     rm -rf CodebaseExceptions
     rm -rf var/cache/*
-    rm -rf var/sessions/*
+    rm -rf var/session/*
