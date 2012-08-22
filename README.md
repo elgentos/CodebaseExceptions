@@ -9,6 +9,6 @@ This Magento extension inserts all the Magento exceptions to your Codebase accou
 * Magento >= 1.5
 
 ## Installation ##
-``cd /path/to/your/magento/root
-git clone git@github.com:elgentos/CodebaseExceptions.git CodebaseExceptions
-cp -R CodebaseExceptions/* .``
+``cd /path/to/your/magento/root``
+``git clone git@github.com:elgentos/CodebaseExceptions.git CodebaseExceptions
+``cp -R CodebaseExceptions/* .``
