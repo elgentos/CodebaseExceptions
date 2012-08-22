@@ -10,7 +10,7 @@ This Magento extension inserts all the Magento exceptions to your Codebase accou
 * php-airbrake (https://github.com/nodrew/php-airbrake) (included)
 
 ## Notes ##
-The excellent php-airbrake class is included because the file Configuration.php is slightly changed; line 33 has been changed to point to exceptions.codebasehq.com instead of api.airbrake.io.
+The excellent php-airbrake class is included because the file Configuration.php is slightly changed; line 33 has been changed to point to exceptions.codebasehq.com instead of api.airbrake.io.   
 Magento doesn't actually throw exceptions; it uses a custom exception handler. Therefore we cannot use the EventHandler that is bundled with php-airbrake but instead we dissect Magento's stack trace message and feed it to Codebase Exceptions.
 
 ## Installation ##
