@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Elgentos_CodebaseExceptions>
+            <version>0.1.0</version>
+        </Elgentos_CodebaseExceptions>
+    </modules>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Elgentos_CodebaseExceptions>
+                    <files>
+                        <default>Elgentos_CodebaseExceptions.csv</default>
+                    </files>
+                </Elgentos_CodebaseExceptions>
+            </modules>
+        </translate>
+
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <codebaseexceptions translate="title" module="codebaseexceptions">
+                                            <title>CodebaseExceptions</title>
+                                        </codebaseexceptions>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <frontend>
+        <routers>
+            <exceptions>
+                <use>standard</use>
+                <args>
+                    <module>Elgentos_CodebaseExceptions</module>
+                    <frontName>exceptions</frontName>
+                </args>
+            </exceptions>
+        </routers>
+    </frontend>
+
+    <global>
+        <helpers>
+            <codebaseexceptions>
+                <class>Elgentos_CodebaseExceptions_Helper</class>
+            </codebaseexceptions>
+        </helpers>
+    </global>
+</config>
