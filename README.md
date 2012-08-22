@@ -25,3 +25,5 @@ You can test whether the extension works by throwing an exception by visiting ht
     rm -rf CodebaseExceptions
     rm -rf var/cache/*
     rm -rf var/session/*
+    
+Now go to your backend and fill out the Codebase Exceptions API key (you can find this under the tab Exceptions in your project page in Codebase).
