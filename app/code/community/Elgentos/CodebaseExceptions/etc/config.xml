@@ -56,4 +56,12 @@
             </codebaseexceptions>
         </helpers>
     </global>
+
+    <default>
+        <codebaseexceptions>
+            <general>
+                <host>api.airbrake.io</host>
+            </general>
+        </codebaseexceptions>
+    </default>
 </config>
