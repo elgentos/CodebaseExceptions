@@ -62,6 +62,7 @@
             <general>
                 <host>api.airbrake.io</host>
                 <secure>1</secure>
+                <environment>production</environment>
             </general>
         </codebaseexceptions>
     </default>
