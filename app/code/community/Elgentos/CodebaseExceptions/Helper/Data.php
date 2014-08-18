@@ -3,12 +3,13 @@
 class Elgentos_CodebaseExceptions_Helper_Data extends Mage_Core_Helper_Abstract {
 
     public function __construct() {
-        if(Mage::getStoreConfig('codebaseexceptions/general/disabled')) return;
+        $apiKey  = Mage::getStoreConfig('codebaseexceptions/general/apikey');
+
+        if(Mage::getStoreConfig('codebaseexceptions/general/disabled') || strlen($apiKey) == 0) return;
 
         require_once Mage::getBaseDir('lib') . '/Airbrake/Client.php';
         require_once Mage::getBaseDir('lib') . '/Airbrake/Configuration.php';
 
-        $apiKey  = Mage::getStoreConfig('codebaseexceptions/general/apikey');
         $options = array();
         $requestUri = explode("/",$_SERVER['REQUEST_URI']);
         $options['action'] = array_pop($requestUri);
