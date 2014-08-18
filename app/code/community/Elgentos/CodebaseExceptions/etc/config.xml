@@ -61,6 +61,7 @@
         <codebaseexceptions>
             <general>
                 <host>api.airbrake.io</host>
+                <secure>1</secure>
             </general>
         </codebaseexceptions>
     </default>

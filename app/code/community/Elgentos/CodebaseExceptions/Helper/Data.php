@@ -18,6 +18,7 @@ class Elgentos_CodebaseExceptions_Helper_Data extends Mage_Core_Helper_Abstract 
         array_pop($projectRoot);
         $options['projectRoot'] = implode('/',$projectRoot).'/';
         $options['host'] = Mage::getStoreConfig('codebaseexceptions/general/host');
+        $options['secure'] = Mage::getStoreConfig('codebaseexceptions/general/secure');
         $config = new Airbrake\Configuration($apiKey,$options);
         $this->client = new Airbrake\Client($config);
     }
