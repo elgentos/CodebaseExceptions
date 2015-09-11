@@ -1,11 +1,19 @@
 <?php
 
 class Elgentos_CodebaseExceptions_Helper_Data extends Mage_Core_Helper_Abstract {
+    protected function isDisabled() {
+        $apiKey  = Mage::getStoreConfig('codebaseexceptions/general/apikey');
+        $disabled = Mage::getStoreConfigFlag('codebaseexceptions/general/disabled');
+        if ($disabled || strlen(trim($apiKey)) == 0) {
+            return true;
+        }
+        return false;
+    }
 
     public function __construct() {
         $apiKey  = Mage::getStoreConfig('codebaseexceptions/general/apikey');
 
-        if(Mage::getStoreConfig('codebaseexceptions/general/disabled') || strlen($apiKey) == 0) return;
+        if($this->isDisabled()) return;
 
         require_once Mage::getBaseDir('lib') . '/Airbrake/Client.php';
         require_once Mage::getBaseDir('lib') . '/Airbrake/Configuration.php';
@@ -25,8 +33,55 @@ class Elgentos_CodebaseExceptions_Helper_Data extends Mage_Core_Helper_Abstract 
     }
 
     public function insertException($reportData) {
-        if(Mage::getStoreConfig('codebaseexceptions/general/disabled')) return;
-        $backtraceLines = explode("\n",$reportData[1]);
+        if ($this->isDisabled()) return;
+        $backtraceLines = explode("\n", $reportData[1]);
+        $backtraces = $this->formatStackTraceArray($backtraceLines);
+
+        $this->client->notifyOnError($reportData[0], $backtraces);
+    }
+
+    /**
+     * @param string $message
+     * @param int $backtraceLinesToSkip Number of backtrace lines/frames to skip
+     */
+    public function sendToAirbrake($message, $backtraceLinesToSkip=1) {
+        if ($this->isDisabled()) return;
+
+        $message = trim($message);
+        $messageArray = explode("\n", $message);
+        if (empty($messageArray)) {
+            return;
+        }
+        $errorClass = 'PHP Error';
+        $errorMessage = array_shift($messageArray);
+        $backTrace = array_slice(debug_backtrace(), $backtraceLinesToSkip);
+
+        $matches = array();
+        if (preg_match('/exception \'(.*)\' with message \'(.*)\' in .*/', $errorMessage, $matches)) {
+            $errorMessage = $matches[2];
+            $errorClass = $matches[1];
+        }
+        if (count($messageArray) > 0) {
+            $errorMessage .= '... [truncated]';
+        }
+
+        $notice = new \Airbrake\Notice;
+        $notice->load(array(
+            'errorClass'   => $errorClass,
+            'backtrace'    => $backTrace,
+            'errorMessage' => $errorMessage,
+        ));
+
+        $this->client->notify($notice);
+    }
+
+    /**
+     * @param array $backtraceLines
+     * @return array
+     */
+    protected function formatStackTraceArray($backtraceLines) {
+        $backtraces = array();
+
         foreach($backtraceLines as $backtrace) {
             $temp = array();
             $parts = explode(': ',$backtrace);
@@ -42,7 +97,6 @@ class Elgentos_CodebaseExceptions_Helper_Data extends Mage_Core_Helper_Abstract 
                 $backtraces[] = $temp;
             }
         }
-
-        $this->client->notifyOnError($reportData[0],$backtraces);
+        return $backtraces;
     }
 }

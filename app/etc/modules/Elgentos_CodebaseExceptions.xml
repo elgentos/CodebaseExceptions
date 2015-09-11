@@ -4,6 +4,9 @@
 			<Elgentos_CodebaseExceptions>
 				<active>true</active>
 				<codePool>community</codePool>
+				<depends>
+					<Mage_Core/>
+				</depends>
 			</Elgentos_CodebaseExceptions>
 		</modules>
 	</config>
