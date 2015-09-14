@@ -28,7 +28,7 @@ You can test whether the extension works by throwing an exception by visiting ht
 	cd <your/magento/root>
 	mkdir .modman
 	cd .modman
-    git clone git@github.com:elgentos/CodebaseExceptions.git CodebaseExceptions
+    git clone git@github.com:airbrake/Airbrake-Magento.git CodebaseExceptions
     cd ..
     modman deploy CodebaseExceptions --force
 
