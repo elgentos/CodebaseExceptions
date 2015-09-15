@@ -25,10 +25,10 @@ You can test whether the extension works by throwing an exception by visiting ht
 
 ## Installation
 
-	cd <your/magento/root>
-	mkdir .modman
-	cd .modman
-    git clone git@github.com:airbrake/Airbrake-Magento.git CodebaseExceptions
+    cd <your/magento/root>
+    mkdir .modman
+    cd .modman
+    git clone https://github.com/airbrake/Airbrake-Magento.git CodebaseExceptions
     cd ..
     modman deploy CodebaseExceptions --force
 
