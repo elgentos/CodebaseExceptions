@@ -30,7 +30,11 @@ class Elgentos_CodebaseExceptions_Helper_Data extends Mage_Core_Helper_Abstract 
         foreach($backtraceLines as $backtrace) {
             $temp = array();
             $parts = explode(': ',$backtrace);
-            $temp['function'] = $parts[1];
+
+            if (isset($parts[1])) {
+                $temp['function'] = $parts[1];
+            }
+
             $temp['file'] = substr($parts[0],0,stripos($parts[0],'('));
             $temp['line'] = substr($parts[0],stripos($parts[0],'(')+1,(stripos($parts[0],')')-1)-stripos($parts[0],'('));
 
