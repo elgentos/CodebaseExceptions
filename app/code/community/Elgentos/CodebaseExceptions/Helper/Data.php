@@ -11,9 +11,16 @@ class Elgentos_CodebaseExceptions_Helper_Data extends Mage_Core_Helper_Abstract 
         require_once Mage::getBaseDir('lib') . '/Airbrake/Configuration.php';
 
         $options = array();
-        $requestUri = explode("/",$_SERVER['REQUEST_URI']);
-        $options['action'] = array_pop($requestUri);
-        $options['component'] = implode('/',array_slice($requestUri,-2));
+        // REQUEST_URI is not available in the CLI context
+        if (isset($_SERVER['REQUEST_URI'])) {
+            $requestUri = explode("/", $_SERVER['REQUEST_URI']);
+            $options['action'] = array_pop($requestUri);
+            $options['component'] = implode('/',array_slice($requestUri,-2));
+        } else {
+            $options['action'] = $_SERVER['PHP_SELF'];
+            $options['component'] = $_SERVER['PHP_SELF'];
+        }
+
         $projectRoot = explode('/',$_SERVER['PHP_SELF']);
         array_pop($projectRoot);
         $options['projectRoot'] = implode('/',$projectRoot).'/';
