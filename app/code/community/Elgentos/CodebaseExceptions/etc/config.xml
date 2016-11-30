@@ -55,5 +55,25 @@
                 <class>Elgentos_CodebaseExceptions_Helper</class>
             </codebaseexceptions>
         </helpers>
+        <models>
+            <codebaseexceptions>
+                <class>Elgentos_CodebaseExceptions_Model</class>
+            </codebaseexceptions>
+        </models>
+        <log>
+            <core>
+                <writer_model>Elgentos_CodebaseExceptions_Model_Log_Writer_Stream</writer_model>
+            </core>
+        </log>
     </global>
+
+    <default>
+        <codebaseexceptions>
+            <general>
+                <host>api.airbrake.io</host>
+                <secure>1</secure>
+                <environment>production</environment>
+            </general>
+        </codebaseexceptions>
+    </default>
 </config>
