@@ -30,7 +30,7 @@ class Configuration extends Record
     protected $_url;
     protected $_hostname;
     protected $_queue;
-    protected $_secure = false;
+    protected $_secure = true;
     protected $_host = 'api.airbrake.io';
     protected $_resource = '/notifier_api/v2/notices';
     protected $_apiEndPoint;
